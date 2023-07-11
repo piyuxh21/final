@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regestration</title>
+    <script src="https://kit.fontawesome.com/a9058e8d75.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" width="127px"></a>
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="index.html">Home</a></li>
+                <!-- <li><a href="#course">Course</a></li>
+                <li><a href="#testimonial">Contact</a></li> -->
+                <li><a href="location.html"><i class="fa-sharp fa-solid fa-location-dot"></i>Location</a></li>
+            </ul>
+        </nav>
+        <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+    </div>
+    <div class="registration-sec">
+        <h2>Registration Form</h2>
+            <form name="submit-to-google-sheet">
+                <div class="left-section">
+                    <div class="form-group">
+                        <label for="name">Applicant Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fatherName">Father's Name:</label>
+                        <input type="text" id="fatherName" name="fatherName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number:</label>
+                        <input type="tel" id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="altMobileNumber">Alternate Mobile Number:</label>
+                        <input type="tel" id="altMobileNumber" name="altMobileNumber" pattern="[0-9]{10}">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <textarea id="address" name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                </div>
+                <div class="right-section">
+                    <div class="form-group">
+                        <label for="district">District:</label>
+                        <input type="text" id="district" name="district" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pin Code:</label>
+                        <input type="text" id="pincode" name="pincode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="education">Education Qualification:</label>
+                        <input type="text" id="education" name="education" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="knowAbout">How did you know about REBEL?</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="knowAbout" value="newspaper">Newspaper
+                            </label>
+                            <label>
+                                <input type="checkbox" name="knowAbout" value="template">Template
+                            </label>
+                            <label>
+                                <input type="checkbox" name="knowAbout" value="poster">Poster
+                            </label>
+                            <label>
+                                <input type="checkbox" name="knowAbout" value="hoarding">Hoarding
+                            </label>
+                            <label>
+                                <input type="checkbox" name="knowAbout" value="friends">Friends
+                            </label>
+                            <label>
+                                <input type="checkbox" name="knowAbout" value="other">Other
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="inquery-submit">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+            <span id="msg"> </span>
+    </div>
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwXH-w-7i3scpdsFLBZUnB3NhPoNLRxvmB77qmBdDywf5aPOpJxO2meN829uTugrS8N/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Message Sent Sucessfully"
+                setTimeout(function(){
+                    msg.innerHTML=""
+                },5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+
+
+
+</body>
+</html>
