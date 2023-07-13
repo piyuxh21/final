@@ -70,6 +70,15 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="branch">Branch:</label>
+                        <select id="branch" name="branch" required>
+                            <option value="">Select</option>
+                            <option value="male">Mirganj</option>
+                            <option value="female">Gopalganj</option>
+                            <!-- <option value="other">Other</option> -->
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="dob">Date of Birth:</label>
                         <input type="date" id="dob" name="dob" required>
                     </div>
@@ -102,33 +111,57 @@
                     </div>
                 </div>
                 <div class="inquery-submit">
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Submit"  onclick="openPopup()">
+                    <div class="popup" id="popup">
+                        <img src="images/popup.png">
+                        <h2>Thank You! </h2>
+                        <p>We will Contact You Soon As Possible.</p>
+                        <button type="button"onclick="closePopup()" id="submit" > OK </button>
+                    </div>
                 </div>
+                <!-- <button type="submit" class="btn2" onclick="openPopup()">Submit</button> -->
+                <!-- <div class="popup" id="popup">
+                    <img src="images/popup.png">
+                    <h2>Thank You! </h2>
+                    <p>We will Contact You Soon As Possible.</p>
+                    <button type="button"onclick="closePopup()" id="submit" > OK </button>
+                </div> -->
+
+                
             </form>
-            <span id="msg"> </span>
+            <!-- <button type="submit" class="btn2" onclick="openPopup()">Submit</button>
+                <div class="popup" id="popup">
+                    <img src="images/popup.png">
+                    <h2>Thank You! </h2>
+                    <p>We will Contact You Soon As Possible.</p>
+                    <button type="button"onclick="closePopup()" id="submit" > OK </button>
+                </div> -->
+
+            <!-- <span id="msg"> </span> -->
     </div>
 
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwXH-w-7i3scpdsFLBZUnB3NhPoNLRxvmB77qmBdDywf5aPOpJxO2meN829uTugrS8N/exec'
         const form = document.forms['submit-to-google-sheet']
-        const msg = document.getElementById("msg")
+        // const msg = document.getElementById("msg")
       
         form.addEventListener('submit', e => {
           e.preventDefault()
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
-                msg.innerHTML = "Message Sent Sucessfully"
-                setTimeout(function(){
-                    msg.innerHTML=""
-                },5000)
+                // msg.innerHTML = "Message Sent Sucessfully"
+                // setTimeout(function(){
+                //     msg.innerHTML=""
+                // })
                 form.reset()
+                
             })
             .catch(error => console.error('Error!', error.message))
         })
     </script>
 
-    <script>
+<script>
     var MenuItems = document.getElementById("MenuItems");
 
     MenuItems.style.maxHeight = "0px";
@@ -145,7 +178,20 @@
     }
 </script>
 
+<script>
+    let popup = document.getElementById("popup");
 
+    setTimeout(function(){
+        msg.innerHTML=""
+        },1000)
+
+    function openPopup (){
+        popup.classList.add("open-popup")
+    }
+    function closePopup (){
+        popup.classList.remove("open-popup")
+    }
+</script>
 
 </body>
 </html>
